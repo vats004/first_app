@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/*these are the tools/libs used*/
+
+/* :root is like a special box where we can
+store some colors that we want to use later. */
+:root {
+  --foreground-rgb: 0, 0, 0; 
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb)); 
+  /* means we're using the black crayon
+   to color the words on the paper. */
+  background: linear-gradient(
+      to bottom, /*direction*/
+      transparent,/*start with this color*/
+      rgb(var(--background-end-rgb)) /*end with this color*/
+    )
+    rgb(var(--background-start-rgb));  /*this is the background*/
+    /* a special trick that makes the 
+    paper go from light gray at the top 
+    to white at the bottom. It's like a 
+    big gradient of color! */
+}

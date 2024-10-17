@@ -1,0 +1,39 @@
+services:
+
+  rustapp:
+    container_name: rustapp
+    image: francescoxx/rustapp:1.0.0
+    build:
+      context: ./backend
+      dockerfile: rust.dockerfile
+      args:
+        DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db  
+
+  db:
+    container_name: db 
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}
+
+
+# container_name is the name of the container
+# image is the name of the image
+# build is the build configuration
+# ports is the port mapping
+# depends_on is the dependency on the database container
+# Notice that the DATABASE_URL build argument is set to postgres://postgres:postgres@db:5432/postgres. db is the name of the service (and the container_name) of the Postgres container so that it will be resolved to the container IP address.
+# We use the arg property to pass the DATABASE_URL build argument to the Dockerfile.
+# We also use a named volume, pg_data, to persist the database data.
